@@ -8,7 +8,7 @@ class Quiz:
 
     def __init__(self):
         self.csv_file = "questions.csv"
-        self.marks = None
+        self.marks = {"correct": 0, "questions": 0}
         self.num_of_questions = None
         self.questions = []
 
@@ -20,17 +20,27 @@ class Quiz:
             file = csv.reader(file)
             if file:
                 for row in file:
-                    self.questions.append(Question(row[0], row[1]))
+                    self.questions.append(Question(str(row[0]), str(row[1])))
 
     @staticmethod
     def user_input(question: str):
-        return input(question)
+        while True:
+            user = input(question)
+            if len(user) < 1:
+                print("Please enter a value")
+                continue
+            else:
+                return user
 
     def get_marks(self):
-        return self.marks
+        return self.marks["correct"]
 
     def set_marks(self, marks):
-        self.marks = marks
+        self.marks["correct"] = marks
+
+    def grade(self):
+        percentage = self.get_marks() / self.get_num_of_questions() * 100
+        return round(percentage, 2)
 
     def get_all_questions(self):
         return self.questions
@@ -47,6 +57,22 @@ class Quiz:
     def set_num_of_questions(self):
         if self.num_of_questions is None:
             self.num_of_questions = len(self.questions)
+            self.marks["questions"] = self.num_of_questions
+
+    def get_num_of_questions(self):
+        return self.marks["questions"]
+
+    def check_answer(self, user, answer):
+        if user == answer:
+            self.set_marks(self.get_marks() + 1)
+            print(f"Correct!")
+        else:
+            print(f"Incorrect! → Answer: {answer}")
+
+    def performance(self):
+        print(f"Your score is {self.get_marks()} out of {self.get_num_of_questions()}")
+        print(f"Your grade is {self.grade()}%")
+        print()
 
     def run(self):
         self.open_csv()
@@ -55,8 +81,9 @@ class Quiz:
         self.set_marks(0)
         while self.num_of_questions > 0:
             question = self.get_next_question()
-            answer = self.user_input(f"{question.get_question()} → ")
-            if answer == question.get_answer():
-                self.set_marks(self.get_marks() + 1)
+            answer = str(self.user_input(f"{question.get_question()} → "))
+            self.check_answer(answer, question.get_answer())
             self.remove_question()
-        print(f"You got {self.get_marks()} out of {self.num_of_questions} correct")
+            self.num_of_questions -= 1
+            print()
+        self.performance()

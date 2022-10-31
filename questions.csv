@@ -1,13 +1,12 @@
-Which provides regular expression matching operations similar to those found in Perl?, re
-Which flag matches the start of a string?, ^
-Which flag matches the end of a string?, $
-Which flag matches any single character including newline?, .
-Which flag matches any single character in the set?, []
-Which flag matches any single character not in the set?, [^]
-Which flag matches the preceding character zero or more times?, *
-Which flag matches the preceding character one or more times?, +
-Which flag matches the preceding character zero or one time?, ?
-Which flag matches the preceding character exactly n times?, {n}
-Which flag matches the preceding character at least n times?, {n,}
-Which flag matches the preceding character at most n times?, {,n}
-Which flag matches 0 or 1 repetition of the preceding character?, ?
+Which provides regular expression matching operations similar to those found in Perl?,re
+Which flag matches the start of a string?,^
+Which flag matches the end of a string?,$
+Which flag matches any single character including newline?,.
+Which flag matches any single character in the set?,[]
+Which flag matches any single character not in the set?,[^]
+Which flag matches the preceding character zero or more times?,*
+Which flag matches the preceding character one or more times?,+
+Which flag matches the preceding character zero or one time?,?
+Which flag matches the preceding character exactly n times?,{n}
+Which flag matches the preceding character at least n times?,"{n,}"
+Which flag matches the preceding character at most n times?,"{,n}"

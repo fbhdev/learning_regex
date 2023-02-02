@@ -3,11 +3,18 @@ import re
 
 from quiz import Quiz
 
-def welcome():
-    print("\n\nLet's learn Regex!\n")
-    print()
+def welcome() -> None:
+    """
+    Welcome message
+    :return: None
+    """
+    print("\nLet's learn Regex!")
 
 def learn_again() -> bool:
+    """
+    Ask user if they want to learn again
+    :return: bool
+    """
     while True:
         run_again = input("Do you want to learn again? (y/n) → ").lower()
         if re.match(r"^(y|yes)$", run_again):
@@ -20,6 +27,10 @@ def learn_again() -> bool:
             print("Please enter a valid input.")
 
 async def main() -> None:
+    """
+    Main function
+    :return: None
+    """
     welcome()
     while True:
         Quiz().run()
